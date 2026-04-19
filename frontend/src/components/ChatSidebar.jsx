@@ -44,7 +44,8 @@ export default function ChatSidebar({ onDataExtracted, isLoading, setIsLoading, 
     setIsLoading(true)
 
     try {
-      const res = await axios.post('http://localhost:8000/api/extract', {
+      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'
+      const res = await axios.post(`${apiBaseUrl}/api/extract`, {
         message: userMsg,
         conversation_history: getHistory(),
       })
@@ -63,7 +64,7 @@ export default function ChatSidebar({ onDataExtracted, isLoading, setIsLoading, 
       setMessages(prev => [...prev, {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: 'Could not reach the backend. Please ensure FastAPI is running on port 8000.',
+        content: 'Could not reach the backend. Please ensure the API is running and VITE_API_BASE_URL is set correctly.',
         timestamp: new Date(),
         isError: true,
       }])
@@ -97,7 +98,7 @@ export default function ChatSidebar({ onDataExtracted, isLoading, setIsLoading, 
         </div>
         <div>
           <div className="sidebar-header-title">AI Assistant</div>
-          <div className="sidebar-header-sub">Log Interaction details here via chat</div>
+          <div className="sidebar-header-sub">Extract Interaction details here via chat</div>
         </div>
         <div className="sidebar-status-dot" />
       </div>
