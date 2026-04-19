@@ -1,0 +1,15 @@
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #102780;
+  overflow: hidden;
+}
+
+.app-main {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  flex: 1;
+  overflow: hidden;
+  height: 100vh;
+}
